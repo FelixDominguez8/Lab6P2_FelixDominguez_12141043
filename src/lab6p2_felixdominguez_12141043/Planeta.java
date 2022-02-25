@@ -79,7 +79,7 @@ public class Planeta {
 
     @Override
     public String toString() {
-        return "nombre=" + nombre + ", temperatura=" + temperatura + ", tamanio=" + tamanio + ", agua=" + agua + ", habitantes=" + habitantes;
+        return nombre;
     }
     
 }
