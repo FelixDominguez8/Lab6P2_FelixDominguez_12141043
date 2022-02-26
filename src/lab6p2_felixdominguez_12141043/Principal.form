@@ -12,6 +12,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Editar Alienigena"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EditarActionPerformed"/>
+          </Events>
         </MenuItem>
         <Component class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
         </Component>
@@ -19,6 +22,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Eliminar Alienigena"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EliminarActionPerformed"/>
+          </Events>
         </MenuItem>
         <Component class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
         </Component>
@@ -26,6 +32,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Imprimir Alienigena"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ImprimirActionPerformed"/>
+          </Events>
         </MenuItem>
       </SubComponents>
     </Container>

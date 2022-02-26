@@ -10,6 +10,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,11 +54,11 @@ public class Principal extends javax.swing.JFrame {
         DefaultTreeModel modelo=(DefaultTreeModel) P6_Arbol.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo.getRoot();
         
-        DefaultMutableTreeNode nodoplaneta = new DefaultMutableTreeNode(((Planeta)planetas.get(0)).getNombre());
-        DefaultMutableTreeNode nodoplaneta2 = new DefaultMutableTreeNode(((Planeta)planetas.get(1)).getNombre());
+        DefaultMutableTreeNode nodoplaneta = new DefaultMutableTreeNode(((Planeta)planetas.get(0)));
+        DefaultMutableTreeNode nodoplaneta2 = new DefaultMutableTreeNode(((Planeta)planetas.get(1)));
         
-        DefaultMutableTreeNode nodoraza = new DefaultMutableTreeNode(((Raza)razas.get(0)).getNombre());
-        DefaultMutableTreeNode nodoraza2 = new DefaultMutableTreeNode(((Raza)razas.get(1)).getNombre());
+        DefaultMutableTreeNode nodoraza = new DefaultMutableTreeNode(((Raza)razas.get(0)));
+        DefaultMutableTreeNode nodoraza2 = new DefaultMutableTreeNode(((Raza)razas.get(1)));
         
         DefaultMutableTreeNode nodoalienigena = new DefaultMutableTreeNode(((Explorador)alienigenas.get(0)).getTipo());
         DefaultMutableTreeNode nodoalienigena2 = new DefaultMutableTreeNode(((Cazador)alienigenas.get(1)).getTipo());
@@ -200,14 +201,29 @@ public class Principal extends javax.swing.JFrame {
         P6_Abducidos = new javax.swing.JSpinner();
 
         Editar.setText("Editar Alienigena");
+        Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarActionPerformed(evt);
+            }
+        });
         PopUp_Funciones.add(Editar);
         PopUp_Funciones.add(jSeparator1);
 
         Eliminar.setText("Eliminar Alienigena");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
         PopUp_Funciones.add(Eliminar);
         PopUp_Funciones.add(jSeparator2);
 
         Imprimir.setText("Imprimir Alienigena");
+        Imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImprimirActionPerformed(evt);
+            }
+        });
         PopUp_Funciones.add(Imprimir);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -873,6 +889,33 @@ public class Principal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_P6_ArbolMouseClicked
+
+    private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_EditarActionPerformed
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+        // TODO add your handling code here:
+        int resp = JOptionPane.showConfirmDialog(this,"¿Seguro que quiere eliminar a este Alienigena?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(resp == JOptionPane.OK_OPTION){
+            DefaultTreeModel modelo = (DefaultTreeModel) P6_Arbol.getModel();
+            modelo.removeNodeFromParent(nodo_select);
+            modelo.reload();
+        }
+    }//GEN-LAST:event_EliminarActionPerformed
+
+    private void ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImprimirActionPerformed
+        // TODO add your handling code here:
+        String nom="";
+        nodo_select.;
+        for(int i=0;i<=alienigenas.size();i++){
+            if(nodo_select.getClass().descriptorString()==nom){
+                nom=alienigenas.get(i).toString2();
+            }
+        }
+        JOptionPane.showMessageDialog(this,nom);
+    }//GEN-LAST:event_ImprimirActionPerformed
 
     /**
      * @param args the command line arguments

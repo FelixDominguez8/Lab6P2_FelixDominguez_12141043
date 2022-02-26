@@ -38,4 +38,9 @@ public class Cazador extends Alienigena{
         return super.toString();
     }
     
+    @Override
+    public String toString2() {
+        return super.toString() + atrapados;
+    }
+    
 }

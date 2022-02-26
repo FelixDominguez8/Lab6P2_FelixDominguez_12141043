@@ -36,7 +36,7 @@ public class Abduscan extends Alienigena{
 
     @Override
     public String toString() {
-        return super.toString();
+        return super.toString() + abduscan;
     }
     
 }

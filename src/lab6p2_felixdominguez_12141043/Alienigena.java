@@ -66,5 +66,9 @@ public class Alienigena {
     public String toString() {
         return nombre;
     }
+    
+    public String toString2() {
+        return nombre + raza + edad + amenaza ;
+    }
        
 }
