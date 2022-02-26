@@ -45,6 +45,11 @@ public class Explorador extends Alienigena{
     public void setFavorito(Planeta favorito) {
         this.favorito = favorito;
     }
+    
+    @Override
+    public String getTipo(){
+        return "Explorador";
+    }
 
     @Override
     public String toString() {

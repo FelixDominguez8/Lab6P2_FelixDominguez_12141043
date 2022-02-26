@@ -28,6 +28,11 @@ public class Abduscan extends Alienigena{
     public void setAbduscan(int abduscan) {
         this.abduscan = abduscan;
     }
+    
+    @Override
+    public String getTipo(){
+        return "Abduscan";
+    }
 
     @Override
     public String toString() {

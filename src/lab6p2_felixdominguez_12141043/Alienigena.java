@@ -57,6 +57,10 @@ public class Alienigena {
     public void setAmenaza(boolean amenaza) {
         this.amenaza = amenaza;
     }
+    
+    public String getTipo(){
+        return " ";
+    }
 
     @Override
     public String toString() {

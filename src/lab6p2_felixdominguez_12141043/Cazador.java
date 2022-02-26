@@ -27,6 +27,11 @@ public class Cazador extends Alienigena{
     public void setAtrapados(int atrapados) {
         this.atrapados = atrapados;
     }
+    
+    @Override
+    public String getTipo(){
+        return "Cazador";
+    }
 
     @Override
     public String toString() {

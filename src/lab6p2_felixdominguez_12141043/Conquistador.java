@@ -34,6 +34,11 @@ public class Conquistador extends Alienigena{
     public void setPlanetas(ArrayList<Planeta> planetas) {
         this.planetas = planetas;
     }
+    
+    @Override
+    public String getTipo(){
+        return "Conquistador";
+    }
 
     @Override
     public String toString() {
