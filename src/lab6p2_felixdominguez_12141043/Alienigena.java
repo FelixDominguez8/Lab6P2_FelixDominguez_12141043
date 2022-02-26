@@ -64,7 +64,7 @@ public class Alienigena {
 
     @Override
     public String toString() {
-        return "nombre=" + nombre + ", raza=" + raza + ", edad=" + edad + ", amenaza=" + amenaza;
+        return nombre;
     }
        
 }

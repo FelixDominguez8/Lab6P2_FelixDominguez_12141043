@@ -53,7 +53,7 @@ public class Explorador extends Alienigena{
 
     @Override
     public String toString() {
-        return super.toString() + " planetas=" + planetas + ", favorito=" + favorito;
+        return super.toString();
     }
     
     

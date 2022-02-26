@@ -42,7 +42,7 @@ public class Conquistador extends Alienigena{
 
     @Override
     public String toString() {
-        return super.toString()+" planetas=" + planetas;
+        return super.toString();
     }
     
     

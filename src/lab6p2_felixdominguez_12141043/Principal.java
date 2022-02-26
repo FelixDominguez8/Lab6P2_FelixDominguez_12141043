@@ -19,6 +19,8 @@ public class Principal extends javax.swing.JFrame {
     static ArrayList<Planeta> planetas=new ArrayList();
     static ArrayList<Raza> razas=new ArrayList();
     static ArrayList<Alienigena> alienigenas=new ArrayList();
+    static DefaultMutableTreeNode nodo_select;
+    static Alienigena alien_select;
     
     
 
@@ -28,29 +30,25 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         
-        DefaultComboBoxModel<String> comboboxrazasp2=new DefaultComboBoxModel ();
+        DefaultComboBoxModel<String> comboboxrazas=new DefaultComboBoxModel ();
         for(int i=0;i<razas.size();i++){
-            comboboxrazasp2.addElement(razas.get(i).getNombre());
+            comboboxrazas.addElement(razas.get(i).getNombre());
         }
-        P2_Raza.setModel(comboboxrazasp2);
+        P2_Raza.setModel(comboboxrazas);
         
-        DefaultComboBoxModel<String> comboboxplanetasp1=new DefaultComboBoxModel ();
+        DefaultComboBoxModel<String> comboboxplanetas=new DefaultComboBoxModel ();
         for(int i=0;i<planetas.size();i++){
-            comboboxplanetasp1.addElement(planetas.get(i).getNombre());
+            comboboxplanetas.addElement(planetas.get(i).getNombre());
         }
-        P1_RPlaneta.setModel(comboboxplanetasp1);
+        P1_RPlaneta.setModel(comboboxplanetas);
         
-        DefaultComboBoxModel<String> comboboxplanetasp2=new DefaultComboBoxModel ();
-        for(int i=0;i<planetas.size();i++){
-            comboboxplanetasp2.addElement(planetas.get(i).getNombre());
-        }
-        P2_Planeta.setModel(comboboxplanetasp2);
+        P2_Planeta.setModel(comboboxplanetas);
         
-        DefaultListModel<String> listaplanetasp2=new DefaultListModel();
+        DefaultListModel<String> listaplanetas=new DefaultListModel();
         for(int i=0;i<planetas.size();i++){
-            listaplanetasp2.addElement(planetas.get(i).getNombre());
+            listaplanetas.addElement(planetas.get(i).getNombre());
         }
-        P2_Lista1.setModel(listaplanetasp2);
+        P2_Lista1.setModel(listaplanetas);
         
         DefaultTreeModel modelo=(DefaultTreeModel) P6_Arbol.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo.getRoot();
@@ -66,10 +64,10 @@ public class Principal extends javax.swing.JFrame {
         DefaultMutableTreeNode nodoalienigena3 = new DefaultMutableTreeNode(((Conquistador)alienigenas.get(2)).getTipo());
         DefaultMutableTreeNode nodoalienigena4 = new DefaultMutableTreeNode(((Abduscan)alienigenas.get(3)).getTipo());
         
-        DefaultMutableTreeNode nodonombre = new DefaultMutableTreeNode((alienigenas.get(0)).getNombre());
-        DefaultMutableTreeNode nodonombre2 = new DefaultMutableTreeNode((alienigenas.get(1)).getNombre());
-        DefaultMutableTreeNode nodonombre3 = new DefaultMutableTreeNode((alienigenas.get(2)).getNombre());
-        DefaultMutableTreeNode nodonombre4 = new DefaultMutableTreeNode((alienigenas.get(3)).getNombre());
+        DefaultMutableTreeNode nodonombre = new DefaultMutableTreeNode((alienigenas.get(0)));
+        DefaultMutableTreeNode nodonombre2 = new DefaultMutableTreeNode((alienigenas.get(1)));
+        DefaultMutableTreeNode nodonombre3 = new DefaultMutableTreeNode((alienigenas.get(2)));
+        DefaultMutableTreeNode nodonombre4 = new DefaultMutableTreeNode((alienigenas.get(3)));
         
         nodoalienigena.add(nodonombre);
         nodoraza.add(nodoalienigena);
@@ -99,6 +97,12 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PopUp_Funciones = new javax.swing.JPopupMenu();
+        Editar = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        Eliminar = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        Imprimir = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         JLabel1 = new javax.swing.JLabel();
@@ -194,6 +198,17 @@ public class Principal extends javax.swing.JFrame {
         P6_Editar = new javax.swing.JButton();
         P6_Atrapados = new javax.swing.JSpinner();
         P6_Abducidos = new javax.swing.JSpinner();
+
+        Editar.setText("Editar Alienigena");
+        PopUp_Funciones.add(Editar);
+        PopUp_Funciones.add(jSeparator1);
+
+        Eliminar.setText("Eliminar Alienigena");
+        PopUp_Funciones.add(Eliminar);
+        PopUp_Funciones.add(jSeparator2);
+
+        Imprimir.setText("Imprimir Alienigena");
+        PopUp_Funciones.add(Imprimir);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -653,6 +668,11 @@ public class Principal extends javax.swing.JFrame {
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         P6_Arbol.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        P6_Arbol.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                P6_ArbolMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(P6_Arbol);
 
         jLabel21.setText("Nombre");
@@ -839,6 +859,21 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_P2_GuardarMouseClicked
 
+    private void P6_ArbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_P6_ArbolMouseClicked
+        // TODO add your handling code here:
+        if(evt.isMetaDown()){
+            int row = P6_Arbol.getClosestRowForLocation(evt.getX(),evt.getY());
+            P6_Arbol.setSelectionRow(row);
+            Object a=P6_Arbol.getSelectionPath().getLastPathComponent();
+            nodo_select = (DefaultMutableTreeNode) a;
+            if(nodo_select.getUserObject() instanceof Alienigena){
+                alien_select= (Alienigena) nodo_select.getUserObject();
+                PopUp_Funciones.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+        }
+        
+    }//GEN-LAST:event_P6_ArbolMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -884,6 +919,9 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Editar;
+    private javax.swing.JMenuItem Eliminar;
+    private javax.swing.JMenuItem Imprimir;
     private javax.swing.JLabel JLabel1;
     private javax.swing.JLabel JLabel2;
     private javax.swing.JCheckBox P1_PAgua;
@@ -938,6 +976,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> P6_Planeta;
     private javax.swing.JComboBox<String> P6_PlanetaF;
     private javax.swing.JComboBox<String> P6_Raza;
+    private javax.swing.JPopupMenu PopUp_Funciones;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -978,6 +1017,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
