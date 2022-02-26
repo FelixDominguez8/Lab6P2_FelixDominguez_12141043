@@ -7,7 +7,9 @@ package lab6p2_felixdominguez_12141043;
 
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
+import javax.swing.DefaultListModel;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
@@ -25,11 +27,42 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        
+        DefaultComboBoxModel<String> comboboxrazasp2=new DefaultComboBoxModel ();
+        for(int i=0;i<razas.size();i++){
+            comboboxrazasp2.addElement(razas.get(i).getNombre());
+        }
+        P2_Raza.setModel(comboboxrazasp2);
+        
         DefaultComboBoxModel<String> comboboxplanetasp1=new DefaultComboBoxModel ();
         for(int i=0;i<planetas.size();i++){
             comboboxplanetasp1.addElement(planetas.get(i).getNombre());
         }
         P1_RPlaneta.setModel(comboboxplanetasp1);
+        
+        DefaultComboBoxModel<String> comboboxplanetasp2=new DefaultComboBoxModel ();
+        for(int i=0;i<planetas.size();i++){
+            comboboxplanetasp2.addElement(planetas.get(i).getNombre());
+        }
+        P2_Planeta.setModel(comboboxplanetasp2);
+        
+        DefaultListModel<String> listaplanetasp2=new DefaultListModel();
+        for(int i=0;i<planetas.size();i++){
+            listaplanetasp2.addElement(planetas.get(i).getNombre());
+        }
+        P2_Lista1.setModel(listaplanetasp2);
+        
+        DefaultTreeModel modelo=(DefaultTreeModel) P6_Arbol.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo.getRoot();
+        DefaultMutableTreeNode nodoplaneta = new DefaultMutableTreeNode();
+        DefaultMutableTreeNode nodoraza = new DefaultMutableTreeNode();
+        DefaultMutableTreeNode nodoalienigena = new DefaultMutableTreeNode();
+        DefaultMutableTreeNode nodonombre = new DefaultMutableTreeNode();
+        nodoalienigena.add(nodonombre);
+        nodoraza.add(nodoalienigena);
+        nodoplaneta.add(nodoraza);
+        raiz.add(nodoplaneta);
+        modelo.reload();
     }
 
     /**
@@ -259,17 +292,18 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel7.setText("Raza");
 
-        P2_Raza.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel8.setText("Planeta Favorito");
-
-        P2_Planeta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel9.setText("Edad");
 
         P2_Amenaza.setText("Es Amenaza");
 
         P2_Guardar.setText("Guardar");
+        P2_Guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                P2_GuardarMouseClicked(evt);
+            }
+        });
 
         P2_Lista1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -278,11 +312,6 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(P2_Lista1);
 
-        P2_Lista2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(P2_Lista2);
 
         P2_Anadir.setText("Añadir a su Lista");
@@ -337,22 +366,21 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(P2_Raza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(P2_Planeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(P2_Edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(P2_Amenaza)
+                    .addComponent(P2_Guardar))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(P2_Edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(P2_Amenaza)
-                            .addComponent(P2_Guardar))
+                        .addGap(96, 96, 96)
+                        .addComponent(P2_Anadir))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(96, 96, 96)
-                                .addComponent(P2_Anadir))))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
 
@@ -779,15 +807,18 @@ public class Principal extends javax.swing.JFrame {
     private void P1_RRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_P1_RRegistrarMouseClicked
         // TODO add your handling code here:
         razas.add(new Raza(planetas.get(P1_RPlaneta.getSelectedIndex()),P1_RNombre.getText()));
-        JOptionPane.showMessageDialog(null,""+razas);
         
     }//GEN-LAST:event_P1_RRegistrarMouseClicked
 
     private void P1_PRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_P1_PRegistrarMouseClicked
         // TODO add your handling code here:
-        
         planetas.add(new Planeta(P1_PNombre.getText(),P1_PTemperatura.getComponentCount(),P1_PTamanio.getComponentCount(),P1_PAgua.isSelected()));
     }//GEN-LAST:event_P1_PRegistrarMouseClicked
+
+    private void P2_GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_P2_GuardarMouseClicked
+        // TODO add your handling code here:
+        alienigenas.add(new Explorador());
+    }//GEN-LAST:event_P2_GuardarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -820,6 +851,8 @@ public class Principal extends javax.swing.JFrame {
         
         planetas.add(new Planeta("Tierra",35,3456788,true));
         planetas.add(new Planeta ("Marte",5,42789,true));
+        razas.add(new Raza(planetas.get(0),"Humano"));
+        razas.add(new Raza(planetas.get(1),"Marciano"));
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

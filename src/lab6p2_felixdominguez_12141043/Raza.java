@@ -40,7 +40,7 @@ public class Raza {
 
     @Override
     public String toString() {
-        return "primordial=" + primordial + ", nombre=" + nombre;
+        return nombre;
     }
     
 }
